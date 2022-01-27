@@ -26,8 +26,8 @@ chrome.runtime.onInstalled.addListener(async () => {
         //console.log(tabs);
 
     }
-
-    chrome.storage.local.set({ groupsKey })
+    console.log(groupsKey)
+    chrome.storage.local.set({ groupsKey: groupsKey })
 
     
 });

@@ -59,12 +59,12 @@ async function handleButtonClick(event) {
   // })
 
   chrome.storage.local.get("groupsKey", (list) => {
-    // console.log(list.groupsKey)
-    for(let group of list.groupsKey){
-      chrome.storage.local.get([group], item => {
-        console.log(item[group])
-      })
-    }
+    console.log(list)
+    // for(let group of list.groupsKey){
+    //   chrome.storage.local.get([group], item => {
+    //     console.log(item[group])
+    //   })
+    // }
   })
 
 }
