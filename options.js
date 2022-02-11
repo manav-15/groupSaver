@@ -58,14 +58,73 @@ async function handleButtonClick(event) {
       
   // })
 
-  chrome.storage.local.get("groupsKey", (list) => {
-    console.log(list)
-    // for(let group of list.groupsKey){
-    //   chrome.storage.local.get([group], item => {
-    //     console.log(item[group])
-    //   })
-    // }
-  })
+  // chrome.storage.local.get("groupsKey", (list) => {
+  //   console.log(list)
+  //   // for(let group of list.groupsKey){
+  //   //   chrome.storage.local.get([group], item => {
+  //   //     console.log(item[group])
+  //   //   })
+  //   // }
+  // })
+
+
+
+
+
+
+
+
+
+  
+  chrome.tabGroups.query({}, (groups) => {
+
+    let groupsKey = [];
+
+    for (let group of groups) {
+        groupsKey.push(group.title)
+        //console.log(group.title)
+        let title = group.title;
+        //let tabs = await chrome.tabs.query({groupId : group.id});
+        let tabList = []
+        chrome.tabs.query({ groupId: group.id }, (tabs) => {
+            for (let tab of tabs) {
+                tabList.push(tab.url)
+            }
+            //console.log(tabList);
+            chrome.storage.local.set({ [title]: tabList })
+        })
+
+        //console.log(tabs);
+
+    }
+    console.log(groupsKey)
+
+    //add uncommon groups from old list
+    chrome.storage.local.get("groupsKey", (groupList) => {
+      console.log(groupList)
+      
+      groupList.groupsKey.filter((item) => {
+        
+        if(groupsKey.indexOf(item) == -1){
+          groupsKey.push(item);
+          return true;
+        }else return false;
+      })
+      // console.log(list) 
+
+      console.log(groupsKey)
+    })
+    
+
+    // chrome.storage.local.set({ groupsKey: groupsKey },() =>{
+    //   location.reload();
+    // });
+
+  });
+
+
+
+
 
 }
 

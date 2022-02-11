@@ -7,3 +7,13 @@ Next -
 Add listeners whenever-
  -- A tab is added/removed from a grp
  -- New Grp is made
+
+Easier soln for above -
+    - A refresh button which updates grps, add new grps and keeps the former grps which are closed
+    - Implemented 
+
+Next -
+
+Change to scrollable list
+Look for corner cases/bugs
+Think- opening a new grp results in the opened tabs being grouped
